@@ -7,6 +7,9 @@
         <Title>Ronja's Toolbox</Title>
         <Authors>Ronja</Authors>
         <Description>Toolbox with stuff I use often.</Description>
+        <RepositoryUrl>https://github.com/totallyRonja/DotNetToolbox</RepositoryUrl>
+        <PackageVersion>1.0.4</PackageVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
 </Project>
