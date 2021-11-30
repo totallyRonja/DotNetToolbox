@@ -2,14 +2,12 @@
 
 namespace RonjasToolbox;
 
-public static class RangeForeach {
+public static class RangeEnumeration {
 
 	public static IEnumerator<int> GetEnumerator(this Range index) {
 		if (index.Start.IsFromEnd || index.End.IsFromEnd) throw new IndexOutOfRangeException("the range needs to be \"from the start\"");
 		int from = index.Start.Value;
 		int to = index.End.Value;
-		if (to < from) throw new IndexOutOfRangeException("end must be bigger than start");
-
 		return new RangeEnumerator(from, to);
 	}
 
@@ -18,20 +16,22 @@ public static class RangeForeach {
 		private int current;
 		private readonly int from;
 		private readonly int to;
+		private readonly bool backwards;
 
 		public RangeEnumerator(int from, int to) {
 			this.from = from;
 			this.to = to;
+			backwards = to < from;
 			Reset();
 		}
 
 		bool IEnumerator.MoveNext() {
-			current++;
-			return current < to;
+			current += backwards ? -1 : 1;
+			return backwards ? (current > to) : (current < to);
 		}
 
 		public void Reset() {
-			current = @from - 1;
+			current = from - (backwards ? -1 : 1);
 		}
 
 		int IEnumerator<int>.Current => current;

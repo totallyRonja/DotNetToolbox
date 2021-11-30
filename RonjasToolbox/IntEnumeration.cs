@@ -2,7 +2,7 @@
 
 namespace RonjasToolbox;
 
-public static class IntForeach {
+public static class IntEnumeration {
 
 	public static IEnumerator<int> GetEnumerator(this int target) {
 		if (target < 0) throw new IndexOutOfRangeException("target must not be negative");
