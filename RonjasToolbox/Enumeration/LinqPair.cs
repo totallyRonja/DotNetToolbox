@@ -27,7 +27,7 @@ public static class LinqPair {
 		private readonly IEnumerator<T> source;
 		public PairEnumerator(IEnumerator<T> input) {
 			source = input;
-			Reset();
+			source.MoveNext(); //prestep source
 		}
 
 		public bool MoveNext() {
@@ -38,7 +38,7 @@ public static class LinqPair {
 		public void Reset() {
 			try {
 				source.Reset();
-			} catch(NotImplementedException) {}
+			} catch(NotSupportedException) {}
 			source.MoveNext();
 		}
 

@@ -28,7 +28,8 @@ public static class LinqTriplet {
 		private readonly IEnumerator<T> source;
 		public TripletEnumerator(IEnumerator<T> input) {
 			source = input;
-			Reset();
+			source.MoveNext(); //start source enumerator
+			MoveNext(); //make fake step to fill previous
 		}
 
 		public bool MoveNext() {
@@ -40,7 +41,7 @@ public static class LinqTriplet {
 		public void Reset() {
 			try {
 				source.Reset();
-			} catch(NotImplementedException) {}
+			} catch(NotSupportedException) {}
 			source.MoveNext(); //start source enumerator
 			MoveNext();
 		}

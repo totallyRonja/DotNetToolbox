@@ -5,16 +5,18 @@ namespace RonjasToolbox;
 public static class RangeEnumeration {
 
 	public static IEnumerator<int> GetEnumerator(this Range index) {
-		if (index.Start.IsFromEnd || index.End.IsFromEnd) throw new IndexOutOfRangeException("the range needs to be \"from the start\"");
 		int from = index.Start.Value;
+		if (index.Start.IsFromEnd) from = -from;
 		int to = index.End.Value;
+		if (index.End.IsFromEnd) from = -from;
 		return new RangeEnumerator(from, to);
 	}
 	
 	public static IEnumerable<int> Iter(this Range index) {
-		if (index.Start.IsFromEnd || index.End.IsFromEnd) throw new IndexOutOfRangeException("the range needs to be \"from the start\"");
 		int from = index.Start.Value;
+		if (index.Start.IsFromEnd) from = -from;
 		int to = index.End.Value;
+		if (index.End.IsFromEnd) from = -from;
 		return new RangeEnumerable(from, to);
 	}
 
