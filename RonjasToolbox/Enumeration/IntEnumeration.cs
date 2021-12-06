@@ -36,10 +36,10 @@ public static class IntEnumeration {
 
 		public IntEnumerator(int to) {
 			this.to = to;
-			Reset();
+			current = -1;
 		}
 
-		bool IEnumerator.MoveNext() {
+		public bool MoveNext() {
 			current++;
 			return current < to;
 		}
