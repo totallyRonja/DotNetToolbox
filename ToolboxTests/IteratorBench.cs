@@ -1,9 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
 using RonjasToolbox;
 
-namespace ToolboxTests; 
-
 public class IteratorBench {
+	
 	[Benchmark]
 	public int For() {
 		int sum = 0;
@@ -26,6 +25,15 @@ public class IteratorBench {
 	public int RangeEnumerator() {
 		int sum = 0;
 		foreach (int i in 0..1024) {
+			sum += i;
+		}
+		return sum;
+	}
+	
+	[Benchmark]
+	public int LinqEnumerableRange() {
+		int sum = 0;
+		foreach (int i in Enumerable.Range(0, 1024)) {
 			sum += i;
 		}
 		return sum;

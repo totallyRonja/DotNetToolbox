@@ -1,4 +1,4 @@
 ﻿using BenchmarkDotNet.Running;
-using ToolboxTests;
+using RonjasToolbox;
 
 BenchmarkRunner.Run<IteratorBench>();

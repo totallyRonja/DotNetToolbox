@@ -4,17 +4,21 @@ namespace RonjasToolbox;
 
 public static class IntEnumeration {
 
-	public static IEnumerator<int> GetEnumerator(this int target) {
+	public static IntEnumerator GetEnumerator(this int target) {
+#if DEBUG
 		if (target < 0) throw new IndexOutOfRangeException("target must not be negative");
+#endif
 		return new IntEnumerator(target);
 	}
 
-	public static IEnumerable<int> Iter(this int target) {
+	public static IntEnumerable Iter(this int target) {
+#if DEBUG
 		if (target < 0) throw new IndexOutOfRangeException("target must not be negative");
+#endif
 		return new IntEnumerable(target);
 	}
-	
-	private class IntEnumerable : IEnumerable<int> {
+
+	public struct IntEnumerable : IEnumerable<int> {
 		private readonly int source;
 		public IntEnumerable(int input) {
 			source = input;
@@ -30,7 +34,7 @@ public static class IntEnumeration {
 	}
 
 
-	private class IntEnumerator : IEnumerator<int> {
+	public struct IntEnumerator : IEnumerator<int> {
 		private int current;
 		private readonly int to;
 
@@ -48,10 +52,10 @@ public static class IntEnumeration {
 			current = -1;
 		}
 
-		int IEnumerator<int>.Current => current;
+		public int Current => current;
 
 		object IEnumerator.Current => current;
 
-		void IDisposable.Dispose() {}
+		public void Dispose() {}
 	}
 }
